@@ -9,20 +9,32 @@ export const updateNewPostAction = (text) => {
     return {type: UPDATE_NEW_POST, newText: text}
 }
 
-const profileReduser = (state, action) => {
+let initialState = {
+        dataPosts: [
+            {id: 1, message: 'hi', likeCaunt: 20},
+            {id: 2, message: 'Hello World', likeCaunt: 44}
+        ],
+        newPostText: ''
+}
+
+const profileReduser = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPost = {
-                id: 5,
+                id: 3,
                 message: state.newPostText,
                 likeCount: 0
             }
-            state.dataPosts.unshift(newPost)
-           state.newPostText = ''
-            return state
+            let stateCopy = {...state}
+            stateCopy.dataPosts = [...state.dataPosts]
+            stateCopy.dataPosts.unshift(newPost)
+            stateCopy.newPostText = ''
+            return stateCopy
+        }
         case UPDATE_NEW_POST:
-            state.newPostText = action.newText
-            return state
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.newText
+            return stateCopy
 
         default:
             return state

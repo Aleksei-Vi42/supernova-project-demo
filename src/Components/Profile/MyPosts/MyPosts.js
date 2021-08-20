@@ -1,25 +1,21 @@
 import React from 'react'
 import Post from './Post/post'
-import {addPostAction, updateNewPostAction} from "../../Redux/Profile-reduser";
+
 
 
 const MyPosts = (props) => {
-
-    let postsElement = props.state.profilePage.dataPosts.map(p => <Post likesCount={p.likeCaunt} message={p.message}/>)
+    let postsElement = props.dataPosts.map(p => <Post likesCount={p.likeCaunt} message={p.message}/>)
 
     let newPostElement = React.createRef()
 
-
-
     let addPost = () => {
-        let text = newPostElement.current.value
-        props.dispatch(addPostAction(text))
-        newPostElement.current.value = props.state.profilePage.newPostText
+        props.addPost()
+        newPostElement.current.value = props.newPostText
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value
-        props.dispatch(updateNewPostAction(text))
+        props.onPostChange(text)
     }
 
 

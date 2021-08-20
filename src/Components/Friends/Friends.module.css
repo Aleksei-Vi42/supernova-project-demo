@@ -1,0 +1,13 @@
+.user {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 10px;
+}
+.description {
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+}
+.userPhoto {
+    height: 100px;
+    width: 100px;
+}
