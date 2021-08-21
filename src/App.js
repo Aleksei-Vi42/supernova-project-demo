@@ -7,7 +7,7 @@ import Profile from './Components/Profile/Profile'
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Setting from "./Components/Setting/Setting";
-import Friends from "./Components/Friends/Friends";
+import 'materialize-css'
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import FriendsContainer from "./Components/Friends/FriendsContainer";
 

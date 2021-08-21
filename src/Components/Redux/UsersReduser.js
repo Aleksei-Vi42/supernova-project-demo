@@ -2,28 +2,27 @@ const FOLLOW = 'FOLLOW '
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FEETCHING '
 
-export const isFollowAC = (userId) => {
-    return {type: FOLLOW, userId}
-}
+export const isFollowAC = (userId) => {return {type: FOLLOW, userId}}
 
-export const isUnfollowAC = (userId) => {
-    return {type: UNFOLLOW, userId}
-}
+export const isUnfollowAC = (userId) => {return {type: UNFOLLOW, userId}}
 
-export const setUsersAC = (users) => {
-   return {type: SET_USERS, users}
-}
+export const setUsersAC = (users) => {return {type: SET_USERS, users}}
 
-export const setCurrentPageAC = (currentPage) => {
-    return {type: SET_CURRENT_PAGE, currentPage}
-}
+export const setCurrentPageAC = (currentPage) => {return {type: SET_CURRENT_PAGE, currentPage}}
+
+export const setTotalUsersCountAC = (totalUsersCount) => {return {type: SET_TOTAL_USERS_COUNT, serverCount: totalUsersCount}}
+
+export const setToggleIsFetchingAC = ( isFetching) => {return {type: TOGGLE_IS_FETCHING ,  isFetching}}
 
 let initialState = {
     users:[],
     pageSize: 5,
-    totalUsersCount: 54,
-    currentPage: 3
+    totalUsersCount: 19,
+    currentPage: 1,
+    isFetching: true
 }
 
 const usersReduser = (state = initialState, action) => {
@@ -32,8 +31,8 @@ const usersReduser = (state = initialState, action) => {
         return {
             ...state,
             users: state.users.map(user => {
-                if (user.id === action.id) {
-                  return {...user, isFollowed: true}
+                if (user.id === action.userId) {
+                  return {...user, followed: true}
                 }
                 return user
             })
@@ -42,8 +41,8 @@ const usersReduser = (state = initialState, action) => {
             return {
                 ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.id) {
-                        return {...user, isFollowed: false}
+                    if (user.id === action.userId) {
+                        return {...user, followed: false}
                     }
                     return user
                 })
@@ -53,6 +52,12 @@ const usersReduser = (state = initialState, action) => {
         }
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.serverCount}
+        }
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return state
