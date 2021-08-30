@@ -1,10 +1,25 @@
 import React from 'react'
-import classes from './Friends.module.css'
+import classes from './Users.module.css'
 import userPhoto from '../../Assets/images/av2.png'
-import  {Loader} from "../Common/Preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 
-let Friends = (props) => {
+/*let clickFollow = (u) =>{
+
+    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+        {
+            withCredentials: true,
+            headers: {
+                'API-KEY': '9a67c6e1-af78-4de5-a37a-dd0a4cf2b48d'
+            }
+        })
+        .then(response => {
+            if (response.data.resultCode == 0) {
+                state.props.unfollow(u.id)
+            }
+        })
+}*/
+let Users = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
@@ -27,17 +42,21 @@ let Friends = (props) => {
                 props.users.map(u => <div key={u.id} className={classes.user}>
                     <div>
                         <div>
-                            <img src={u.photos.small != null ? u.photos.small : userPhoto}
-                                 className={classes.userPhoto}/>
+                            <NavLink to={'/profile/' + u.id}>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto}
+                                     className={classes.userPhoto}/>
+                            </NavLink>
                         </div>
                         <div>
-                            {u.followed
-                                ? <button onClick={() => {
-                                    props.unfollow(u.id)
-                                }}>Unfollow</button>
-                                : <button onClick={() => {
+
+                            {u.followed ? <button disabled={props.isDisabled.some(id => id === u.id)} onClick={() => {
+                                props.unfollow(u.id)
+                                }}>Unfollow
+                                </button>
+                                : <button disabled={props.isDisabled.some(id => id === u.id)} onClick={() => {
                                     props.follow(u.id)
-                                }}>Follow</button>
+                                }}>Follow
+                                </button>
                             }
                         </div>
 
@@ -67,4 +86,4 @@ let Friends = (props) => {
     )
 }
 
-export default Friends
+export default Users

@@ -35,8 +35,6 @@ const MyPosts = (props) => {
                 </div>
                 <div>
                     {postsElement}
-                    <Post/>
-                    <Post/>
                 </div>
             </div>
         </div>
