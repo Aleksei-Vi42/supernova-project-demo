@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './Header.module.css'
+import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
     return (
@@ -9,9 +10,11 @@ const Header = (props) => {
             </div>
             <div className={classes.login}>
                 {props.isAuth ? props.login
-                              : <button>
-                                 Login
-                                </button>
+                    : <NavLink to={'/login'}>
+                       <div>
+                        Login
+                       </div>
+                      </NavLink>
                 }
             </div>
         </div>

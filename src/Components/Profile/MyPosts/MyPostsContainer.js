@@ -13,26 +13,23 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addPost: () => {
-            dispatch(addPostAction())
+        addPost: (newPostText) => {
+            dispatch(addPostAction(newPostText))
         },
-        onPostChange: (text) => {
-            dispatch(updateNewPostAction(text))
-        }
     }
 }
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps) (MyPosts)
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
-   /* let addPost = () => {
-        let action = addPostAction()
-        props.store.dispatch(action)
+/* let addPost = () => {
+     let action = addPostAction()
+     props.store.dispatch(action)
 
-    }*/
+ }*/
 
-   /* let onPostChange = (text) => {
-        let action = updateNewPostAction(text)
-        props.store.dispatch(action)
-    }*/
+/* let onPostChange = (text) => {
+     let action = updateNewPostAction(text)
+     props.store.dispatch(action)
+ }*/
 
 /*
     return <MyPosts updateNewPostText={onPostChange} addPost={addPost}

@@ -10,17 +10,19 @@ import Setting from "./Components/Setting/Setting";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import LoginPage from "./Components/Login/LoginPage";
 
 
 
 
-const App = () => {
+const   App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <NavBar/>
                 <div className='app-wrapper-content'>
+                    <Route path='/login' render={() => <LoginPage/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
