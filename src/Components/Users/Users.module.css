@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: 2fr 10fr;
     padding: 10px;
+    border: solid gray 2px;
+    margin-bottom: 10px;
 }
 .description {
     display: grid;

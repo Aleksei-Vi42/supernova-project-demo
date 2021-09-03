@@ -1,44 +1,55 @@
-import {authApi, usersApi} from "../../Api/Api";
+import {authApi} from "../../Api/Api";
+import {stopSubmit} from "redux-form";
 
 
 const SET_USER_DATA = 'SET_USER_DATA'
-const LOGIN_USER = 'AUTH_USER'
 
 
-export const setAuthUserData = (id, login, email) => {
-    return {type: SET_USER_DATA, data: {id, login, email}}
+export const setAuthUserData = (id, login, email, isAuth) => {
+    return {type: SET_USER_DATA, data: {id, login, email, isAuth}}
 }
-
-export const loginUser = (email, password, isRememberMe) => {
-    return   {type: LOGIN_USER, data: {email, password, isRememberMe}}
-}
-
 
 
 export const authMeThunkCreator = () => {
     return  (dispatch) => {
-        authApi.getAuthMe()
+      return   authApi.getAuthMe()
             .then(data => {
                 if(data.resultCode === 0) {
                     let {id, login, email} = data.data
-                    dispatch(setAuthUserData(id, login, email))
+                    dispatch(setAuthUserData(id, login, email, true))
                 }
             })
     }
 }
 
 
-export const loginUserThunkCreator = () => {
+export const loginUserThunkCreator = (email, password, isRememberMe) => {
     return  (dispatch) => {
-        authApi.loginUser()
-            .then(data => {
-                if(data.resultCode === 0) {
-                    let {email, password, isRememberMe} = data.data
-                    dispatch(loginUser(email, password, isRememberMe))
+
+        authApi.loginUser(email, password, isRememberMe)
+            .then(response => {
+                if(response.data.resultCode === 0) {
+                    dispatch(authMeThunkCreator())
+                } else {
+                    let errorMessage = response.data.messages
+                    dispatch(stopSubmit('login', {_error: errorMessage}))
                 }
             })
     }
 }
+
+export const logoutUserThunkCreator = () => {
+    return  (dispatch) => {
+        authApi.logoutUser()
+            .then(response => {
+                if(response.data.resultCode === 0) {
+                    dispatch(setAuthUserData(null, null, null, false))
+                }
+            })
+    }
+}
+
+
 
 let initialState = {
     id: null,
@@ -55,8 +66,7 @@ const authReduser = (state = initialState, action) => {
         case   SET_USER_DATA :
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
             }
         default:
             return state

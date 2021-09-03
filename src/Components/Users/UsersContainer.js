@@ -47,7 +47,7 @@ let mapStateToProps = (state) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         isDisabled: state.usersPage.isDisabled,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
     }
 }
 

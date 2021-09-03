@@ -1,27 +1,33 @@
 import React from "react"
 import {LoginReduxForm} from "./LoginForm";
+import {connect} from "react-redux";
+import {loginUserThunkCreator} from "../Redux/AuthReduser";
+import {Redirect} from "react-router-dom";
 
 
-class LoginPageContainer extends React.Component {
+const LoginPageContainer = (props) => {
 
-    componentDidMount() {
+
+  let  loginUser = (formData) => {
+       props.login(formData.email, formData.password, formData.isRememberMe)
     }
 
-    loginUser = (value) => {
-        alert(value)
-         }
+    if(props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
 
+    return <div>
+        <h1>LOGIN</h1>
+        <LoginReduxForm onSubmit={loginUser}/>
+    </div>
 
-        render () {
-            return <div>
-                <h1>LOGIN</h1>
-                <LoginReduxForm onSubmit={this.props.loginUser}/>
-            </div>
+}
 
-        }
+let mapStateToProps = (state) => {
+    return {
+       isAuth: state.auth.isAuth
+    }
 }
 
 
-
-
-export default LoginPageContainer
+export default connect(mapStateToProps, {login :loginUserThunkCreator} )(LoginPageContainer)
