@@ -1,12 +1,12 @@
 import {usersApi} from "../../Api/Api";
 
-const FOLLOW = 'FOLLOW '
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FEETCHING '
-const TOGGLE_IS_FOLLOWING_PROGRESS ='TOGGLE_IS_FOLLOWING_PROGRESS'
+const FOLLOW = 'userReducer/FOLLOW '
+const UNFOLLOW = 'userReducer/UNFOLLOW'
+const SET_USERS = 'userReducer/SET_USERS'
+const SET_CURRENT_PAGE = 'userReducer/SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'userReducer/SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'userReducer/TOGGLE_IS_FETCHING '
+const TOGGLE_IS_FOLLOWING_PROGRESS ='userReducer/TOGGLE_IS_FOLLOWING_PROGRESS'
 
 
 export const follow = (userId) => {return {type: FOLLOW, userId}}
@@ -23,8 +23,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
         usersApi.getUsers(currentPage, pageSize).then(data => {
             dispatch(setToggleIsFetching(false))
             dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(32))
-           /* dispatch(setTotalUsersCount(data.totalCount))*/
+            /*dispatch(setTotalUsersCount(data.totalCount))*/
         })
     }
 }
@@ -57,14 +56,14 @@ export const followThunkCreator = (userId) => {
 
 let initialState = {
     users:[],
-    pageSize: 5,
-    totalUsersCount: 19,
+    pageSize: 10,
+    totalUsersCount: 100,
     currentPage: 1,
     isFetching: true,
     isDisabled: []
 }
 
-const usersReduser = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case  FOLLOW:
         return {
@@ -112,4 +111,4 @@ const usersReduser = (state = initialState, action) => {
 }
 
 
-export default usersReduser
+export default usersReducer

@@ -1,11 +1,11 @@
 import {profileApi, usersApi} from "../../Api/Api";
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST'
-const SET_USERS_PROFILE = 'SET_USER_PROFILE'
+const ADD_POST = 'profileReducer/ADD-POST'
+const UPDATE_NEW_POST = 'profileReducer/UPDATE-NEW-POST'
+const SET_USERS_PROFILE = 'profileReducer/SET_USER_PROFILE'
 
-const GET_USER_STATUS = 'GET_USER_STATUS'
-const UPDATE_USER_STATUS = 'UPDATE_STATUS'
+const GET_USER_STATUS = 'profileReducer/GET_USER_STATUS'
+const UPDATE_USER_STATUS = 'profileReducer/UPDATE_STATUS'
 
 export const getUserStatus = (status) => {
     return {type: GET_USER_STATUS, status}
@@ -37,13 +37,9 @@ export const getProfileThunkCreator = (userId) => {
             })
     }
 }
-export const getStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileApi. getProfileStatus(userId)
-            .then(data => {
+export const getStatusThunkCreator = (userId) => async (dispatch) => {
+      let data = await profileApi.getProfileStatus(userId)
                 dispatch(getUserStatus(data))
-            })
-    }
 }
 
 export const updateStatusThunkCreator = (status) => {

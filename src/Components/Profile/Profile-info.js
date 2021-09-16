@@ -1,8 +1,8 @@
-import React from 'react'
-import classes from './Profile-info.module.css'
-import {Loader} from "../Common/Preloader/Preloader";
-import userPhoto from '../../Assets/images/av2.png'
-import ProfileStatus from "./ProfileStatus";
+import React from "react"
+import classes from "./Profile-info.module.css"
+import {Loader} from "../Common/Preloader/Preloader"
+import userPhoto from "../../Assets/images/av2.png"
+import ProfileStatusWithHook from "./ProfileStatusWithHooc"
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -23,12 +23,11 @@ const ProfileInfo = (props) => {
                         Loocking for job: {props.profile.profilelookingForAJob ? 'Yes' : 'Not'}
                     </div>
                 </div>
-                <img  className={classes.ava} src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
+                <img className={classes.ava}
+                     src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
                 <div className={classes.profileStatus}>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileStatusWithHook status={props.status} updateStatus={props.updateStatus}/>
                 </div>
-
-
             </div>
         </div>
     )

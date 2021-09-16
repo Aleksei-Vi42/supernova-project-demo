@@ -1,10 +1,10 @@
 
-import React from "react";
-import {addMessageAction, updateNewMessageAction} from "../Redux/Dialog-reduser";
-import Dialogs from "./Dialogs";
-import {connect} from "react-redux";
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
-import {compose} from "redux";
+import React from "react"
+import {addMessageAction} from "../Redux/DialogReducer"
+import Dialogs from "./Dialogs"
+import {connect} from "react-redux"
+import {withAuthRedirect} from "../../HOC/withAuthRedirect"
+import {compose} from "redux"
 
 
 let mapStateToProps = (state) => {

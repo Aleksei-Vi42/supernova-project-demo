@@ -1,9 +1,9 @@
-import profileReduser from "./Profile-reduser";
-import dialogReduser from "./Dialog-reduser";
-import sideBarReduser from "./SideBar-reduser";
+import profileReduser from "./ProfileReduser";
+import dialogReducer from "./DialogReducer";
+import sideBarReducer from "./SideBarReducer";
 
 
-let store = {
+let testStore = {
 
     _state: {
         profilePage: {
@@ -42,8 +42,8 @@ let store = {
 
     dispatch(action) {
         this._state.profilePage = profileReduser(this._state.profilePage, action)
-        this._state.dialogPage = dialogReduser(this._state.dialogPage, action)
-        this._state.sideBar = sideBarReduser(this._state.sideBar, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action)
         this._callSubscriber(this._state)
     }
 }
@@ -52,4 +52,4 @@ let store = {
 
 
 
-export default store
+export default testStore

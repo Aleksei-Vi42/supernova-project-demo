@@ -1,11 +1,11 @@
-import classes from "./Dialogs.module.css";
-import Message from "./Message";
-import DialogItem from "./DialogItem";
-import React from "react";
-import {Redirect} from "react-router-dom";
-import {Field, Form, reduxForm} from "redux-form";
-import {Textarea} from "../Common/FormControl/TextAreaControl";
-import {maxLenght, required} from "../../Utils/Validators";
+import classes from "./Dialogs.module.css"
+import Message from "./Message"
+import DialogItem from "./DialogItem"
+import React from "react"
+import {Redirect} from "react-router-dom"
+import {Field, Form, reduxForm} from "redux-form"
+import {Textarea} from "../Common/FormControl/TextAreaControl"
+import {maxLenght, required} from "../../Utils/Validators"
 
 const maxLength100 = maxLenght(100)
 
@@ -15,11 +15,9 @@ const Dialogs = (props) => {
 
     let nameUsers = props.dialogPage.dataUsers.map(user => <DialogItem name={user.name} id={user.id}/>)
 
-
     let addNewMessage = (value) => {
         props.addMessage(value.newMessageText)
     }
-
 
     if (props.isAuth === false) {
         return <Redirect to={'/login'}/>
@@ -54,7 +52,6 @@ const addMessageForm = (props) => {
         </Form>
     )
 }
-
 
 const AddMessageReduxForm = reduxForm ({form: 'newMessage'})(addMessageForm)
 

@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
 
 export const addMessageAction = (newMessageText) => {
     return {type: ADD_MESSAGE, text: newMessageText}
@@ -19,7 +18,7 @@ let initialState = {
         {id: 2, message: 'Yo'}
     ],
 }
-const dialogReduser = (state = initialState, action) => {
+const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {
@@ -34,4 +33,4 @@ const dialogReduser = (state = initialState, action) => {
             return state
     }
 }
-export default dialogReduser
+export default dialogReducer

@@ -1,5 +1,5 @@
 import React from 'react'
-import {addPostAction, updateNewPostAction} from '../../Redux/Profile-reduser'
+import {addPostAction, updateNewPostAction} from '../../Redux/ProfileReduser'
 import MyPosts from './MyPosts'
 import {connect} from 'react-redux'
 
@@ -22,13 +22,13 @@ const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 /* let addPost = () => {
      let action = addPostAction()
-     props.store.dispatch(action)
+     props.testStore.dispatch(action)
 
  }*/
 
 /* let onPostChange = (text) => {
      let action = updateNewPostAction(text)
-     props.store.dispatch(action)
+     props.testStore.dispatch(action)
  }*/
 
 /*

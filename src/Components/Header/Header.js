@@ -1,10 +1,8 @@
-import React from 'react'
-import classes from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import React from "react"
+import classes from "./Header.module.css"
+import {NavLink} from "react-router-dom"
 
 const Header = (props) => {
-
-
     return (
         <div className={classes.header}>
             <div>

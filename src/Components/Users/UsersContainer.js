@@ -1,28 +1,36 @@
-import React from "react";
-import {connect} from "react-redux";
-import Users from "./Users";
+import React from "react"
+import {connect} from "react-redux"
+import Users from "./Users"
 import {
     setCurrentPage,
     toggleIsFollowingProgress, getUsersThunkCreator, unFollowThunkCreator, followThunkCreator
-} from "../Redux/UsersReduser";
-import {Loader} from "../Common/Preloader/Preloader";
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
-import {compose} from "redux";
+} from "../Redux/UsersReducer"
+import {Loader} from "../Common/Preloader/Preloader"
+import {withAuthRedirect} from "../../HOC/withAuthRedirect"
+import {compose} from "redux"
+import {
+    getCurrentPage,
+    getIsAuth,
+    getIsDisabled,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "./UsersReselect"
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
-        this.props.getUsers(this.props.pageSize)
+        this.props.requestUsers(pageNumber)
     }
 
     render() {
-
         return <>
             {this.props.isFetching ? <Loader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -34,6 +42,7 @@ class UsersContainer extends React.Component {
                    onPageChanged={this.onPageChanged}
                    toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                    isDisabled={this.props.isDisabled}
+
             />
         </>
     }
@@ -41,13 +50,13 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isDisabled: state.usersPage.isDisabled,
-        isAuth: state.auth.isAuth,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        isDisabled: getIsDisabled(state),
+        isAuth: getIsAuth(state),
     }
 }
 
@@ -57,9 +66,9 @@ export default compose(
             toggleIsFollowingProgress,
             unFollowThunkCreator,
             followThunkCreator,
-            getUsers: getUsersThunkCreator
+            requestUsers: getUsersThunkCreator
         }
     ),
-    withAuthRedirect
+   /* withAuthRedirect*/
 )(UsersContainer)
 

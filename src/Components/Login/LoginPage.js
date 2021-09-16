@@ -1,7 +1,7 @@
 import React from "react"
 import {LoginReduxForm} from "./LoginForm";
 import {connect} from "react-redux";
-import {loginUserThunkCreator} from "../Redux/AuthReduser";
+import {loginUserThunkCreator} from "../Redux/AuthReducer";
 import {Redirect} from "react-router-dom";
 
 

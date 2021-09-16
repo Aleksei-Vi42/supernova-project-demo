@@ -1,9 +1,9 @@
-import {authMeThunkCreator} from "./AuthReduser";
+import {authMeThunkCreator, setAuthUserData} from "./AuthReducer";
 
 const USER_INITIALIZING = 'USER_INITIALIZING'
 
-export const userInitializing = () => {
-    return {type: USER_INITIALIZING}
+export const userInitializing = (initialized) => {
+    return {type: USER_INITIALIZING, initialized}
 }
 
 
@@ -14,10 +14,13 @@ let initialState = {
     initialized: false
 }
 
-export const initializingApp = () => (dispatch) => {
-    let promise = dispatch(authMeThunkCreator())
-    Promise.all([promise]).then(() => {dispatch(userInitializing())})
 
+export  const initializingApp = () => (dispatch) => {
+    let promise = dispatch(authMeThunkCreator())
+    Promise.all([promise])
+        .then(() => {
+            dispatch(userInitializing())
+        })
 }
 
 

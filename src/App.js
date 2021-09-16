@@ -1,19 +1,19 @@
-import './App.css'
-import React from 'react'
-import {BrowserRouter, Route} from "react-router-dom";
-import NavBar from './Components/NavBar/NavBar'
-import ProfileContainer from './Components/Profile/ProfileContainer'
-import News from "./Components/News/News";
-import Music from "./Components/Music/Music";
-import Setting from "./Components/Setting/Setting";
-import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import UsersContainer from "./Components/Users/UsersContainer";
-import HeaderContainer from "./Components/Header/HeaderContainer";
-import LoginPage from "./Components/Login/LoginPage";
-import {connect} from "react-redux";
-import {authMeThunkCreator} from "./Components/Redux/AuthReduser";
-import {initializingApp} from "./Components/Redux/AppReduser";
-import {Loader} from "./Components/Common/Preloader/Preloader";
+import "./App.css"
+import React from "react"
+import {BrowserRouter, Route} from "react-router-dom"
+import NavBar from "./Components/NavBar/NavBar"
+import ProfileContainer from "./Components/Profile/ProfileContainer"
+import News from "./Components/News/News"
+import Music from "./Components/Music/Music"
+import Setting from "./Components/Setting/Setting"
+import DialogsContainer from "./Components/Dialogs/DialogsContainer"
+import UsersContainer from "./Components/Users/UsersContainer"
+import HeaderContainer from "./Components/Header/HeaderContainer"
+import LoginPage from "./Components/Login/LoginPage"
+import {connect} from "react-redux"
+import {initializingApp} from "./Components/Redux/AppReducer"
+import {Loader} from "./Components/Common/Preloader/Preloader"
+import {authMeThunkCreator} from "./Components/Redux/AuthReducer"
 
 
 class App extends React.Component {
@@ -50,5 +50,4 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-
-export default connect(mapStateToProps, {initializingApp})(App);
+export default connect(mapStateToProps, {initializingApp, authMeThunkCreator})(App);

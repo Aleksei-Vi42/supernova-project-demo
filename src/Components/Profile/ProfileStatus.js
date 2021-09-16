@@ -1,6 +1,5 @@
 import React from "react"
 
-
 class ProfileStatus extends React.Component {
 
     state = {
@@ -43,7 +42,8 @@ class ProfileStatus extends React.Component {
                     </div>
                    :
                     <div>
-                      <input onChange={this.onStatusCange} autoFocus={true} onBlur={this.DeActivateEditMod} value={this.state.status}/>
+                      <input onChange={this.onStatusCange} autoFocus={true} onBlur={this.DeActivateEditMod}
+                             value={this.state.status}/>
                     </div>
                 }
             </div>
