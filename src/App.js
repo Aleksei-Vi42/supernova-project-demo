@@ -1,6 +1,6 @@
 import "./App.css"
 import React from "react"
-import {BrowserRouter, Route} from "react-router-dom"
+import {HashRouter,BrowserRouter, Route} from "react-router-dom"
 import NavBar from "./Components/NavBar/NavBar"
 import ProfileContainer from "./Components/Profile/ProfileContainer"
 import News from "./Components/News/News"
